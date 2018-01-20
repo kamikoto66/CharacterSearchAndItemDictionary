@@ -18,13 +18,15 @@ public enum Server
 
 public abstract class DnfApiBase : MonoBehaviour {
 
-    public enum worldType
+    public enum WorldType
     {
         macth,
         front,
         full
     };
 
-    public worldType _WorldType;
+    public WorldType _WorldType;
     protected string ApiKey = "kY6CeAILmIU4TKUufr1yaX4MNElGRMEh";
+
+    protected abstract IEnumerator SearchData();
 }

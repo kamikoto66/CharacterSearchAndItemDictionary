@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class CharacterInfoSearch : DnfApiBase {
 
     private CharacterSerch.Data _UserData;
-    private Server _Server;
 
     public void SearchUrl(CharacterSerch.Data data, Server server)
     {

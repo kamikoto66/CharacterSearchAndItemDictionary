@@ -22,6 +22,7 @@ public class Character : UI {
 	// Use this for initialization
 	void Start () {
         UIHelper.AddButtonListener(Vars["장착장비"], () => {
+            Instantiate(Resources.Load<GameObject>("Prefabs/CharacterEquipmentSearch")).GetComponent<CharacterEquipmentSearch>().SearchUrl(_Server, _CharacterCode);
         });
         UIHelper.AddButtonListener(Vars["능력치"], () => {
             Instantiate(Resources.Load<GameObject>("Prefabs/CharacterAbilitySearch")).GetComponent<CharacterAbilitySearch>().SearchUrl(_Server, _CharacterCode);

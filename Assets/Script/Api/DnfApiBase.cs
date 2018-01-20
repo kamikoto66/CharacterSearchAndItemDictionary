@@ -26,6 +26,7 @@ public abstract class DnfApiBase : MonoBehaviour {
     };
 
     public WorldType _WorldType;
+    protected Server _Server;
     protected string ApiKey = "kY6CeAILmIU4TKUufr1yaX4MNElGRMEh";
 
     protected abstract IEnumerator SearchData();

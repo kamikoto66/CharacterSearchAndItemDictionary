@@ -6,7 +6,6 @@ using Newtonsoft.Json;
 
 public class SearchcharacterInfo : DnfApiBase {
 
-    private Server _Server;
     private string _CharacterName;
     private GameObject _ServerControl;
 

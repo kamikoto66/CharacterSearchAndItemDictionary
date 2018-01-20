@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Newtonsoft.Json;
 
-public class CharacterAbilitySearch : DnfApiBase{
 
-    private string _CharacterCode;
+public class CharacterEquipmentSearch : DnfApiBase
+{
+    string _CharacterCode;
 
     public void SearchUrl(Server server, string chracterCode)
     {
@@ -17,22 +19,16 @@ public class CharacterAbilitySearch : DnfApiBase{
 
     protected override IEnumerator SearchData()
     {
-        string Url = "https://api.neople.co.kr/df/";
-        Url += "servers/" + _Server.ToString();
+        string Url = "https://api.neople.co.kr/df/servers/" + _Server.ToString();
         Url += "/characters/" + _CharacterCode;
-        Url += "/status?";
+        Url += "/equip/equipment?";
         Url += "apikey=" + ApiKey;
 
         WWW www = new WWW(Url);
         yield return www;
 
-        var json = JsonConvert.DeserializeObject<CharacterAbility>(www.text);
+        var json = JsonConvert.DeserializeObject<CharacterEquipment>(www.text);
 
-        if(json != null)
-        {
-
-            json.Print();
-        }
-
+        json.Print();
     }
 }

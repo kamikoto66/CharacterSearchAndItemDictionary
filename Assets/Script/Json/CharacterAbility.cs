@@ -30,20 +30,21 @@ public class CharacterAbility : CharacterInfo
     [JsonProperty("buff")]
     public ReadOnlyCollection<Buff> _Buffs;
 
+    [JsonProperty("status")]
+    public ReadOnlyCollection<Status> _Status;
+
     public new void Print() 
     {
         base.Print();
 
         foreach(var v in _Buffs)
         {
-            Debug.Log(v._Name);
-            Debug.Log(v._Level);
+            Debug.Log(v);
+        }
 
-            foreach(var vv in v._Status)
-            {
-                Debug.Log(vv._Name);
-                Debug.Log(vv._Value);
-            }
+        foreach(var v in _Status)
+        {
+            Debug.Log(v);
         }
     }
 }

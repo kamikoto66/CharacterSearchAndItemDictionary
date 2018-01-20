@@ -49,13 +49,13 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    private List<UI> uiList;
-    private List<UI> uiModalList;
+    private List<UI> uiList = new List<UI>();
+    private List<UI> uiModalList = new List<UI>();
 
     private void Awake()
     {
-        uiList = new List<UI>();
-        uiModalList = new List<UI>();
+        //uiList = new List<UI>();
+        //uiModalList = new List<UI>();
     }
 
     public static T OpenUI<T>(string filepath, UIType type = UIType.Normal) where T : UI

@@ -6,42 +6,36 @@ using Newtonsoft.Json;
 
 public class SearchcharacterInfo : DnfApiBase {
 
-    private Server _Server;
-    private string _CharacterName;
-    private GameObject _ServerControl;
+    //public RectTransform _Content;
 
     public void SearchUrl(Server server, string characterName, GameObject ServerControl)
     {
-        _Server = server;
-        _CharacterName = characterName;
-        _ServerControl = ServerControl;
-
-        StartCoroutine(SearchData());
-    }
-
-    protected override IEnumerator SearchData()
-    {
-        if (_CharacterName.Length == 1)
-            _WorldType = WorldType.macth;
+        if(characterName.Length == 1)
+            _WorldType = worldType.macth;
         else
-            _WorldType = WorldType.full;
-
-        string CharacterNameUrl = WWW.EscapeURL(_CharacterName, System.Text.Encoding.UTF8);
-        string Url = "https://api.neople.co.kr/df/servers/" + _Server.ToString();
+            _WorldType = worldType.full;
+        
+        string CharacterNameUrl = WWW.EscapeURL(characterName, System.Text.Encoding.UTF8);
+        string Url = "https://api.neople.co.kr/df/servers/" + server.ToString();
         Url += "/characters?characterName=" + CharacterNameUrl;
-        Url += "&limit=200";
+        Url += "&limit=10";
         Url += "&wordType=" + _WorldType.ToString();
         Url += "&apikey=" + ApiKey;
 
-        WWW www = new WWW(Url);
+        StartCoroutine(SearchCharacterData(Url, ServerControl));
+    }
+
+    protected IEnumerator SearchCharacterData(string url, GameObject ServerControl)
+    {
+        WWW www = new WWW(url);
         yield return www;
 
-        var json = JsonConvert.DeserializeObject<CharacterSerch>(www.text);
+        var json = Newtonsoft.Json.JsonConvert.DeserializeObject<CharacterSerch>(www.text);
 
         if(json.rows.Count != 0 && json != null)
         {
             var Result = Instantiate(Resources.Load<GameObject>("Prefabs/Result"));
-            Result.transform.SetParent(GameObject.Find("Canvas-UIManager").transform);
+            Result.transform.SetParent(GameObject.Find("Canvas").transform);
             Result.transform.localPosition = Vector2.zero;
 
             RectTransform Content = Result.transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<RectTransform>();
@@ -59,7 +53,6 @@ public class SearchcharacterInfo : DnfApiBase {
 
                 var UserInfo = Instantiate(Resources.Load<GameObject>("Prefabs/UserInfo"));
                 UserInfo.GetComponent<UserInfo>().Data = userData;
-                UserInfo.GetComponent<UserInfo>().Server = _Server;
                 UserInfo.GetComponentInChildren<Text>().text = UserInfoText;
                 UserInfo.transform.SetParent(Content);
                 UserInfo.transform.localPosition = pos;
@@ -73,15 +66,29 @@ public class SearchcharacterInfo : DnfApiBase {
             size.Set(size.x, size.y + childCount*150.0f);
             Content.sizeDelta = size;
 
-            UIStack.Instance.PushUI(Result);
+            Result.GetComponent<Result>().ServerControl = ServerControl;
+            ServerControl.SetActive(false);
         }
         else
         {
             //팝업창
-            UIManager.OpenUI<PopUp>("Prefabs/PopUp");
+
         }
 
         Destroy(this.gameObject);
         StopAllCoroutines();
+
+        //나중에
+        //string Url = "https://api.neople.co.kr/df/servers/" + _Server.ToString();
+        //Url += "/characters/" + characterId;
+        //Url += "?apikey=" + ApiKey;
+
+        //WWW www = new WWW(Url);
+        //yield return www;
+
+        //var JsonData = JsonConvert.DeserializeObject<CharacterInfo>(www.text);
+
+        //JsonData.Print();
+        //GameObject.Find("Response").GetComponent<Text>().text = www.text;
     }
 }

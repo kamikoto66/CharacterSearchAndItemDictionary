@@ -22,19 +22,21 @@ public class Character : UI {
 	// Use this for initialization
 	void Start () {
         UIHelper.AddButtonListener(Vars["장착장비"], () => {
-            Instantiate(Resources.Load<GameObject>("Prefabs/CharacterEquipmentSearch")).GetComponent<CharacterEquipmentSearch>().SearchUrl(_Server, _CharacterCode);
+            Instantiate(Resources.Load<GameObject>("Prefabs/Api/CharacterEquipmentSearch")).GetComponent<CharacterEquipmentSearch>().SearchUrl(_Server, _CharacterCode);
         });
         UIHelper.AddButtonListener(Vars["능력치"], () => {
-            Instantiate(Resources.Load<GameObject>("Prefabs/CharacterAbilitySearch")).GetComponent<CharacterAbilitySearch>().SearchUrl(_Server, _CharacterCode);
+            Instantiate(Resources.Load<GameObject>("Prefabs/Api/CharacterAbilitySearch")).GetComponent<CharacterAbilitySearch>().SearchUrl(_Server, _CharacterCode);
         });
-        UIHelper.AddButtonListener(Vars["아바타"], () => { });
-        UIHelper.AddButtonListener(Vars["크리쳐"], () => { });
-        UIHelper.AddButtonListener(Vars["휘장"], () => { });
+        UIHelper.AddButtonListener(Vars["아바타"], () => {
+            Instantiate(Resources.Load<GameObject>("Prefabs/Api/CharacterAvatarSearch")).GetComponent<CharacterAvatarSearch>().SearchUrl(_Server, _CharacterCode);
+
+        });
+        UIHelper.AddButtonListener(Vars["크리쳐"], () => {
+            Instantiate(Resources.Load<GameObject>("Prefabs/Api/CharacterCreatureSearch")).GetComponent<CharacterCreatureSearch>().SearchUrl(_Server, _CharacterCode);
+        });
+        UIHelper.AddButtonListener(Vars["휘장"], () => {
+            Instantiate(Resources.Load<GameObject>("Prefabs/Api/CharacterFlagSearch")).GetComponent<CharacterFlagSearch>().SearchUrl(_Server, _CharacterCode);
+        });
         UIHelper.AddButtonListener(Vars["back"], () => { UIStack.Instance.PopUI(); });
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }

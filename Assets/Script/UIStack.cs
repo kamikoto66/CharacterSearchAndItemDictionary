@@ -56,11 +56,8 @@ public class UIStack : MonoBehaviour{
             Destroy(ui);
 
             _UIStack.Peek().SetActive(true);
-
-
         }
 
         return ui;
     }
-
 }

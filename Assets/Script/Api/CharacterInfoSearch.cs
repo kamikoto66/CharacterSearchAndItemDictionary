@@ -26,7 +26,7 @@ public class CharacterInfoSearch : DnfApiBase {
         yield return www;
 
         var JsonData = JsonConvert.DeserializeObject<CharacterInfo>(www.text);
-        var Canvas = GameObject.FindObjectOfType<Canvas>();
+        //var Canvas = GameObject.FindObjectOfType<Canvas>();
 
         if(JsonData != null)
         {
@@ -34,10 +34,11 @@ public class CharacterInfoSearch : DnfApiBase {
             obj.GetComponent<Character>().Server = _Server;
             obj.GetComponent<Character>().CharacterCode = _UserData.characterId;
 
-            obj.transform.SetParent(Canvas.transform);
+            UIStack.Instance.PushUI(obj, true);
+            //obj.transform.SetParent(Canvas.transform);
             obj.transform.localPosition = Vector3.zero;
 
-            UIStack.Instance.PushUI(obj);
+            //UIStack.Instance.PushUI(obj);
 
             JsonData.Print();
         }

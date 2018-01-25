@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class ServerControl : UI {
 
@@ -67,6 +68,10 @@ public class ServerControl : UI {
             Instantiate(Resources.Load<GameObject>("Prefabs/CharacterSearch")).GetComponent<SearchcharacterInfo>().SearchUrl(_Server, Vars["characterNameInput"].GetComponentInChildren<Text>().text, this.gameObject);
         });
 
+        Vars["characterNameInput"].GetComponentInChildren<InputField>().onEndEdit.AddListener((string text) =>
+        {
+            Instantiate(Resources.Load<GameObject>("Prefabs/CharacterSearch")).GetComponent<SearchcharacterInfo>().SearchUrl(_Server, text, this.gameObject);
+        });
     }
 
     private void ServerSetUp(Server server)

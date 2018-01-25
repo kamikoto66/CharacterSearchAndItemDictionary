@@ -1,9 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
-using Newtonsoft.Json;
-
 
 public class CharacterEquipmentSearch : DnfApiBase
 {
@@ -28,7 +25,24 @@ public class CharacterEquipmentSearch : DnfApiBase
         yield return www;
 
         var json = JsonConvert.DeserializeObject<CharacterEquipment>(www.text);
+        json.Test();
 
-        json.Print();
+        //var content = UIStack.Instance.PushUI(UIManager.OpenUI<Equipment>("Prefabs/Equipment").gameObject).transform.Find("Content");
+        //var Equipment = Instantiate(Resources.Load<GameObject>("Prefabs/Equipment"));
+        //Equipment.transform.SetParent(GameObject.Find("Holder").transform);
+        //UIStack.Instance.PushUI(Equipment);
+
+        //foreach (var s in _SlotName)
+        //{
+        //    CharacterEquipment.Equipment Equi = json._Equipment[s];
+
+        //    GameObject obj = Instantiate(Resources.Load<GameObject>("Prefabs/Item"));
+        //    //obj.GetComponent<Item>().SetUp(Equi);
+        //    obj.transform.SetParent(Equipment.transform.Find("Content"));
+        //    obj.transform.position = Vector3.zero;
+        //}
+
+        //Debug.Log(www.text);
+        //json.Print();
     }
 }

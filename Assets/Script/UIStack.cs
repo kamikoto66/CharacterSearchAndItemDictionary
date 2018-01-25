@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class UIStack : MonoBehaviour{
 
+    public Transform _Holder;
     private Stack<GameObject> _UIStack = new Stack<GameObject>();
     private static UIStack _Instance;
 
@@ -25,7 +26,7 @@ public class UIStack : MonoBehaviour{
         }
     }
     
-    public GameObject PushUI(GameObject UIInstance)
+    public GameObject PushUI(GameObject UIInstance, bool holder = false)
     {
         if(!_UIStack.Contains(UIInstance))
         {
@@ -39,6 +40,11 @@ public class UIStack : MonoBehaviour{
                 v.SetActive(false);
 
                 _UIStack.Push(UIInstance);
+            }
+
+            if(holder)
+            {
+                UIInstance.transform.SetParent(_Holder);
             }
         }
 

@@ -7,10 +7,14 @@ public class Drawer : UI {
 
     public Button _EmptyButton;
     public Animator _DrawerAnimator;
-    public Transform _Canvas;
+
+    //private Transform _Holder;
 
     // Use this for initialization
     void Start () {
+
+        //_Holder = GameObject.Find("Holder").transform;
+
         UIHelper.AddButtonListener(Vars["EmptyButton"], ()=> {
             _DrawerAnimator.SetTrigger("close");
             _EmptyButton.interactable = false;
@@ -24,10 +28,9 @@ public class Drawer : UI {
             if (GameObject.FindObjectOfType<ServerControl>() == null)
             {
                 var obj = Instantiate(Resources.Load<GameObject>("Prefabs/ServerControl"));
-                obj.transform.SetParent(_Canvas);
+                UIStack.Instance.PushUI(obj, true);
                 obj.transform.localPosition = Vector2.zero;
 
-                UIStack.Instance.PushUI(obj);
             }
         });
     }

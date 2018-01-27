@@ -17,13 +17,14 @@ public class Drawer : UI {
 
         UIHelper.AddButtonListener(Vars["EmptyButton"], ()=> {
             _DrawerAnimator.SetTrigger("close");
-            _EmptyButton.interactable = false;
+            _EmptyButton.gameObject.SetActive(false);
         });
 
         UIHelper.AddButtonListener(Vars["CharacterSearch"], () =>
         {
             GameObject.Find("Drawer").GetComponent<Animator>().SetTrigger("close");
-            _EmptyButton.interactable = false;
+            _EmptyButton.gameObject.SetActive(false);
+
 
             if (GameObject.FindObjectOfType<ServerControl>() == null)
             {

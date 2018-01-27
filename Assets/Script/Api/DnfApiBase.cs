@@ -26,7 +26,7 @@ public abstract class DnfApiBase : MonoBehaviour {
         full
     };
 
-    public string[] _SlotName = { "무기", "칭호","머리어깨", "상의", "하의", "벨트", "신발", "팔찌", "목걸이", "반지", "보조장비", "마법석", "귀걸이", "보조장비" };
+    public string[] _SlotName = { "무기", "칭호","머리어깨", "상의", "하의", "벨트", "신발", "팔찌", "목걸이", "반지", "보조장비", "마법석", "귀걸이", "보조무기" };
 
 
     public WorldType _WorldType;

@@ -27,7 +27,12 @@ public class CharacterEquipmentSearch : DnfApiBase
         var json = JsonConvert.DeserializeObject<CharacterEquipment>(www.text);
         json.Test();
 
-        //var content = UIStack.Instance.PushUI(UIManager.OpenUI<Equipment>("Prefabs/Equipment").gameObject).transform.Find("Content");
+        var Canvas = FindObjectOfType<Canvas>().transform;
+
+        var Equiment = Instantiate(Resources.Load<GameObject>("Prefabs/Equipment"));
+        Equiment.transform.SetParent(Canvas.transform);
+
+        //var content = UIStack.Instance.PushUI();
         //var Equipment = Instantiate(Resources.Load<GameObject>("Prefabs/Equipment"));
         //Equipment.transform.SetParent(GameObject.Find("Holder").transform);
         //UIStack.Instance.PushUI(Equipment);
@@ -37,12 +42,12 @@ public class CharacterEquipmentSearch : DnfApiBase
         //    CharacterEquipment.Equipment Equi = json._Equipment[s];
 
         //    GameObject obj = Instantiate(Resources.Load<GameObject>("Prefabs/Item"));
-        //    //obj.GetComponent<Item>().SetUp(Equi);
+        //    obj.GetComponent<Item>().SetUp(Equi);
         //    obj.transform.SetParent(Equipment.transform.Find("Content"));
         //    obj.transform.position = Vector3.zero;
         //}
 
-        //Debug.Log(www.text);
-        //json.Print();
+        Debug.Log(www.text);
+        json.Print();
     }
 }

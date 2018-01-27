@@ -13,7 +13,7 @@ public class DrawerBar : UI {
         UIHelper.AddButtonListener(Vars["Button"], ()=> {
             var Drawer = GameObject.Find("Drawer");
             Drawer.GetComponent<Animator>().SetTrigger("open");
-            _EmptyButton.interactable = true;
+            _EmptyButton.gameObject.SetActive(true);
         });
 	}
 }

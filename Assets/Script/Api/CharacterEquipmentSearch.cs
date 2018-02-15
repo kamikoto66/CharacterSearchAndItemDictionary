@@ -29,25 +29,25 @@ public class CharacterEquipmentSearch : DnfApiBase
 
         var Canvas = FindObjectOfType<Canvas>().transform;
 
-        var Equiment = Instantiate(Resources.Load<GameObject>("Prefabs/Equipment"));
-        Equiment.transform.SetParent(Canvas.transform);
+        var equipment = Instantiate(Resources.Load<GameObject>("Prefabs/Equipment"));
+        equipment.transform.SetParent(Canvas.transform);
+        equipment.transform.localPosition = Vector3.zero;
+        UIStack.Instance.PushUI(equipment);
 
-        //var content = UIStack.Instance.PushUI();
-        //var Equipment = Instantiate(Resources.Load<GameObject>("Prefabs/Equipment"));
-        //Equipment.transform.SetParent(GameObject.Find("Holder").transform);
-        //UIStack.Instance.PushUI(Equipment);
+        RectTransform content = equipment.GetComponent<UI>().Vars["Content"].transform as RectTransform;
+        Vector3 position = new Vector3(0f, 140f, 0f);
 
-        //foreach (var s in _SlotName)
-        //{
-        //    CharacterEquipment.Equipment Equi = json._Equipment[s];
+        foreach (var s in _SlotName)
+        {
+            Debug.Log(s);
+            CharacterEquipment.Equipment Equi = json._Equipment[s];
 
-        //    GameObject obj = Instantiate(Resources.Load<GameObject>("Prefabs/Item"));
-        //    obj.GetComponent<Item>().SetUp(Equi);
-        //    obj.transform.SetParent(Equipment.transform.Find("Content"));
-        //    obj.transform.position = Vector3.zero;
-        //}
+            GameObject obj = Instantiate(Resources.Load<GameObject>("Prefabs/Item"));
+            obj.GetComponent<Item>().SetUp(Equi);
+            obj.transform.SetParent(content);
+            obj.transform.localPosition = position;
 
-        Debug.Log(www.text);
-        json.Print();
+            position.y -= 100f;
+        }
     }
 }

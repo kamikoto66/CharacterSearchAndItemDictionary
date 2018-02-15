@@ -11,15 +11,14 @@ public class Item : UI {
     private Text _Reinforce;
 
 	// Use this for initialization
-	void Start () {
-
+	private void Init() {
     }
 
     public GameObject SetUp(CharacterEquipment.Equipment Equi)
     {
         _SlotName = Vars["Index"].GetComponentInChildren<Text>();
         _Name = Vars["Name"].GetComponentInChildren<Text>();
-        _Reinforce = Vars["reinforce"].GetComponentInChildren<Text>();
+        _Reinforce = Vars["Reinforce"].GetComponentInChildren<Text>();
 
         _Equipment = Equi;
 
@@ -34,19 +33,19 @@ public class Item : UI {
 
     private string Test()
     {
-        string output = "-";
+        string output = "- ";
 
-        if(_Equipment._Reinforce > 0)
+        if(_Equipment._AmplificationName == null && _Equipment._Reinforce > 0)
         {
-            output += "+" + _Equipment._Reinforce.ToString() +"강화";
+            output = "+" + _Equipment._Reinforce.ToString() +"강화";
         }
 
-        if(_Equipment._AmplificationName != "null" && _Equipment._Reinforce > 0)
+        if(_Equipment._AmplificationName != null && _Equipment._Reinforce > 0)
         {
-            output += "+" + _Equipment._Reinforce.ToString() + "증폭";
+            output = "+" + _Equipment._Reinforce.ToString() + "증폭";
         }
 
-        if (_Equipment._ItemType.Equals("무기") && _Equipment._Refine > 0)
+        if (_Equipment._SlotName.Equals("무기") && _Equipment._Refine > 0)
         {
             output += "(" + _Equipment._Refine.ToString() + ")";
         }

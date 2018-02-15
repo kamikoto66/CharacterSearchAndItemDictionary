@@ -25,7 +25,7 @@ public class CharacterEquipmentSearch : DnfApiBase
         yield return www;
 
         var json = JsonConvert.DeserializeObject<CharacterEquipment>(www.text);
-        json.Test();
+        json.ListToDictionary();
 
         var Canvas = FindObjectOfType<Canvas>().transform;
 
@@ -40,14 +40,19 @@ public class CharacterEquipmentSearch : DnfApiBase
         foreach (var s in _SlotName)
         {
             Debug.Log(s);
-            CharacterEquipment.Equipment Equi = json._Equipment[s];
 
-            GameObject obj = Instantiate(Resources.Load<GameObject>("Prefabs/Item"));
-            obj.GetComponent<Item>().SetUp(Equi);
-            obj.transform.SetParent(content);
-            obj.transform.localPosition = position;
+            if(json._Equipment.ContainsKey(s))
+            {
+                CharacterEquipment.Equipment Equi = json._Equipment[s];
 
-            position.y -= 100f;
+                GameObject obj = Instantiate(Resources.Load<GameObject>("Prefabs/Item"));
+                obj.GetComponent<Item>().SetUp(Equi);
+                obj.transform.SetParent(content);
+                obj.transform.localPosition = position;
+
+                position.y -= 100f;
+            }
+ 
         }
     }
 }

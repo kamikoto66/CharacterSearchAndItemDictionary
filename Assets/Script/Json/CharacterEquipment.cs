@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 [SerializeField]
-public class CharacterEquipment : CharacterInfo
+public class CharacterEquipment : CharacterInfo, IListToDictionary
 {
     [SerializeField]
     public class Equipment
@@ -52,21 +52,6 @@ public class CharacterEquipment : CharacterInfo
 
     public Dictionary<string, Equipment> _Equipment;
 
-    public void Test()
-    {
-        _Equipment = new Dictionary<string, Equipment>();
-
-        foreach(var equi in _EquipmentJson)
-        {
-            string index = equi._SlotName;
-
-            if(!_Equipment.ContainsKey(index))
-            {
-                _Equipment.Add(index, equi);
-            }
-        }
-    }
-
     public new void Print()
     {
         base.Print();
@@ -74,6 +59,21 @@ public class CharacterEquipment : CharacterInfo
         foreach(var v in _EquipmentJson)
         {
             Debug.Log(v._ItemName);
+        }
+    }
+
+    public void ListToDictionary()
+    {
+        _Equipment = new Dictionary<string, Equipment>();
+
+        foreach (var equi in _EquipmentJson)
+        {
+            string index = equi._SlotName;
+
+            if (!_Equipment.ContainsKey(index))
+            {
+                _Equipment.Add(index, equi);
+            }
         }
     }
 }

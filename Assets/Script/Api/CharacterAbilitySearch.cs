@@ -27,11 +27,26 @@ public class CharacterAbilitySearch : DnfApiBase{
         yield return www;
 
         var json = JsonConvert.DeserializeObject<CharacterAbility>(www.text);
+        json.ListToDictionary();
 
         if(json != null)
         {
+            var Canvas = FindObjectOfType<Canvas>().transform;
 
-            json.Print();
+            var AbilityPage = Instantiate(Resources.Load<GameObject>("Prefabs/AbilityPage"));
+            AbilityPage.transform.SetParent(Canvas.transform);
+            AbilityPage.transform.localPosition = new Vector3(0f, -30f,0f);
+            UIStack.Instance.PushUI(AbilityPage);
+
+            var AbilityUI = AbilityPage.GetComponent<UI>();
+
+            foreach(var ability in _Ability)
+            {
+                var status = json._Ability[ability];
+
+                var obj = AbilityUI.Vars[status._Name];
+                obj.GetComponent<Ability>().SetUp(status);
+            }
         }
 
     }

@@ -33,14 +33,14 @@ public class CharacterInfoSearch : DnfApiBase {
             var obj = Instantiate(Resources.Load<GameObject>("Prefabs/Character"));
             obj.GetComponent<Character>().Server = _Server;
             obj.GetComponent<Character>().CharacterCode = _UserData.characterId;
+            obj.GetComponent<UI>().Vars["Name"].GetComponent<Text>().text = _UserData.characterName;
 
             UIStack.Instance.PushUI(obj, true);
-            //obj.transform.SetParent(Canvas.transform);
             obj.transform.localPosition = Vector3.zero;
 
-            //UIStack.Instance.PushUI(obj);
-
-            JsonData.Print();
+            //JsonData.Print();
         }
+
+        Destroy(this.gameObject);
     }
 }

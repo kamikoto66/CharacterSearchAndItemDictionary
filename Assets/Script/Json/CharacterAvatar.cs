@@ -5,7 +5,7 @@ using UnityEngine;
 using Newtonsoft.Json;
 
 [SerializeField]
-public class CharacterAvatar : CharacterInfo {
+public class CharacterAvatar : CharacterInfo, IListToDictionary {
 
     [SerializeField]
     public class Emblems
@@ -51,6 +51,8 @@ public class CharacterAvatar : CharacterInfo {
     [JsonProperty("avatar")]
     public ReadOnlyCollection<Avatar> _Avatar;
 
+    public Dictionary<string, Avatar> _AvatarDictionary;
+
     public new void Print()
     {
         base.Print();
@@ -66,4 +68,18 @@ public class CharacterAvatar : CharacterInfo {
         }
     }
 
+    public void ListToDictionary()
+    {
+        _AvatarDictionary = new Dictionary<string, Avatar>();
+
+        foreach (var avatar in _Avatar)
+        {
+            string Name = avatar._SlotName;
+
+            if(!_AvatarDictionary.ContainsKey(Name))
+            {
+                _AvatarDictionary.Add(Name, avatar);
+            }
+        }
+    }
 }

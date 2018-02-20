@@ -30,7 +30,7 @@ public class CharacterInfoSearch : DnfApiBase {
 
         if(JsonData != null)
         {
-            var obj = Instantiate(Resources.Load<GameObject>("Prefabs/Character"));
+            var obj = Instantiate(Resources.Load<GameObject>("Prefabs/Character/Character"));
             obj.GetComponent<Character>().Server = _Server;
             obj.GetComponent<Character>().CharacterCode = _UserData.characterId;
             obj.GetComponent<UI>().Vars["Name"].GetComponent<Text>().text = _UserData.characterName;

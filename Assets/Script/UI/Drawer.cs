@@ -28,7 +28,7 @@ public class Drawer : UI {
 
             if (GameObject.FindObjectOfType<ServerControl>() == null)
             {
-                var obj = Instantiate(Resources.Load<GameObject>("Prefabs/ServerControl"));
+                var obj = Instantiate(Resources.Load<GameObject>("Prefabs/Character/ServerControl"));
                 UIStack.Instance.PushUI(obj, true);
                 obj.transform.localPosition = Vector2.zero;
 

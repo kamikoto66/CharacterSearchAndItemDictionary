@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class PopUp : UI {
 
@@ -10,4 +12,9 @@ public class PopUp : UI {
             Destroy(this.gameObject);
         });
 	}
+
+    //public void SetUp(string error)
+    //{
+    //    Vars["Error"].GetComponent<Text>().text = error;
+    //}
 }

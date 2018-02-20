@@ -65,12 +65,12 @@ public class ServerControl : UI {
         });
 
         UIHelper.AddButtonListener(Vars["Enter"], () => {
-            Instantiate(Resources.Load<GameObject>("Prefabs/CharacterSearch")).GetComponent<SearchcharacterInfo>().SearchUrl(_Server, Vars["characterNameInput"].GetComponentInChildren<Text>().text, this.gameObject);
+            Instantiate(Resources.Load<GameObject>("Prefabs/Api/CharacterSearch")).GetComponent<SearchcharacterInfo>().SearchUrl(_Server, Vars["characterNameInput"].GetComponentInChildren<Text>().text, this.gameObject);
         });
 
         Vars["characterNameInput"].GetComponentInChildren<InputField>().onEndEdit.AddListener((string text) =>
         {
-            Instantiate(Resources.Load<GameObject>("Prefabs/CharacterSearch")).GetComponent<SearchcharacterInfo>().SearchUrl(_Server, text, this.gameObject);
+            Instantiate(Resources.Load<GameObject>("Prefabs/Api/CharacterSearch")).GetComponent<SearchcharacterInfo>().SearchUrl(_Server, text, this.gameObject);
         });
     }
 

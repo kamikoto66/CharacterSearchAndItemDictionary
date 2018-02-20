@@ -33,7 +33,7 @@ public class CharacterAvatarSearch : DnfApiBase
         {
             var Canvas = FindObjectOfType<Canvas>().transform;
 
-            var EmblemPage = Instantiate(Resources.Load<GameObject>("Prefabs/EmblemPage"));
+            var EmblemPage = Instantiate(Resources.Load<GameObject>("Prefabs/Character/EmblemPage"));
             EmblemPage.transform.SetParent(Canvas.transform);
             EmblemPage.transform.localPosition = new Vector3(0f, -30f, 0f);
 
@@ -49,7 +49,7 @@ public class CharacterAvatarSearch : DnfApiBase
                     type = Emblem.EmblemType.Emblem_3;
                 }
 
-                GameObject AvatarObject = Instantiate(Resources.Load<GameObject>("prefabs/emblem"));
+                GameObject AvatarObject = Instantiate(Resources.Load<GameObject>("prefabs/Character/emblem"));
                 AvatarObject.GetComponent<Transform>().SetParent(content);
                 AvatarObject.GetComponent<Transform>().localPosition = position;
                 AvatarObject.GetComponent<Emblem>().SetUp(type, value);

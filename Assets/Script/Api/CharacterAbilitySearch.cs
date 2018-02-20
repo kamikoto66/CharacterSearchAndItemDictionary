@@ -33,7 +33,7 @@ public class CharacterAbilitySearch : DnfApiBase{
         {
             var Canvas = FindObjectOfType<Canvas>().transform;
 
-            var AbilityPage = Instantiate(Resources.Load<GameObject>("Prefabs/AbilityPage"));
+            var AbilityPage = Instantiate(Resources.Load<GameObject>("Prefabs/Character/AbilityPage"));
             AbilityPage.transform.SetParent(Canvas.transform);
             AbilityPage.transform.localPosition = new Vector3(0f, -30f,0f);
             UIStack.Instance.PushUI(AbilityPage);
@@ -48,6 +48,6 @@ public class CharacterAbilitySearch : DnfApiBase{
                 obj.GetComponent<Ability>().SetUp(status);
             }
         }
-
+        Destroy(this.gameObject);
     }
 }

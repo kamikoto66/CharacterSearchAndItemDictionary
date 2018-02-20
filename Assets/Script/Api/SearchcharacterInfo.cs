@@ -39,7 +39,7 @@ public class SearchcharacterInfo : DnfApiBase {
 
         if(json.rows.Count != 0 && json != null)
         {
-            var Result = Instantiate(Resources.Load<GameObject>("Prefabs/Result"));
+            var Result = Instantiate(Resources.Load<GameObject>("Prefabs/Character/Result 1"));
             Result.transform.SetParent(GameObject.Find("Canvas-UIManager").transform);
             Result.transform.localPosition = Vector2.zero;
 
@@ -56,20 +56,20 @@ public class SearchcharacterInfo : DnfApiBase {
                 UserInfoText += "/Lv." + userData.level.ToString();
                 UserInfoText += "/" + userData.jobGrowName;
 
-                var UserInfo = Instantiate(Resources.Load<GameObject>("Prefabs/UserInfo"));
+                var UserInfo = Instantiate(Resources.Load<GameObject>("Prefabs/Character/UserInfo"));
                 UserInfo.GetComponent<UserInfo>().Data = userData;
                 UserInfo.GetComponent<UserInfo>().Server = _Server;
                 UserInfo.GetComponentInChildren<Text>().text = UserInfoText;
                 UserInfo.transform.SetParent(Content);
-                UserInfo.transform.localPosition = pos;
+                //UserInfo.transform.localPosition = pos;
 
-                pos.y -= 170.0f;
+                //pos.y -= 170.0f;
             }
 
             int childCount = Content.childCount;
 
             var size = Content.sizeDelta;
-            size.Set(size.x, size.y + childCount*150.0f);
+            size.Set(size.x, size.y + childCount*180f);
             Content.sizeDelta = size;
 
             UIStack.Instance.PushUI(Result);

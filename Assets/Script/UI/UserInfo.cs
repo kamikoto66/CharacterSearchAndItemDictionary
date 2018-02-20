@@ -30,7 +30,7 @@ public class UserInfo : MonoBehaviour {
     private void Start()
     {
         UIHelper.AddButtonListener(GetComponent<Button>(), () => {
-            Instantiate(Resources.Load<GameObject>("Prefabs/CharacterInfoSearch")).GetComponent<CharacterInfoSearch>().SearchUrl(_Data, _Server);
+            Instantiate(Resources.Load<GameObject>("Prefabs/Api/CharacterInfoSearch")).GetComponent<CharacterInfoSearch>().SearchUrl(_Data, _Server);
         });
     }
 }

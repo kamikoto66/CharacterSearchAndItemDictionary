@@ -25,34 +25,36 @@ public class CharacterEquipmentSearch : DnfApiBase
         yield return www;
 
         var json = JsonConvert.DeserializeObject<CharacterEquipment>(www.text);
-        json.ListToDictionary();
 
-        var Canvas = FindObjectOfType<Canvas>().transform;
-
-        var equipment = Instantiate(Resources.Load<GameObject>("Prefabs/Equipment"));
-        equipment.transform.SetParent(Canvas.transform);
-        equipment.transform.localPosition = Vector3.zero;
-        UIStack.Instance.PushUI(equipment);
-
-        RectTransform content = equipment.GetComponent<UI>().Vars["Content"].transform as RectTransform;
-        Vector3 position = new Vector3(0f, 140f, 0f);
-
-        foreach (var s in _SlotName)
+        if(json != null)
         {
-            Debug.Log(s);
+            json.ListToDictionary();
 
-            if(json._Equipment.ContainsKey(s))
+            var Canvas = FindObjectOfType<Canvas>().transform;
+
+            var equipment = Instantiate(Resources.Load<GameObject>("Prefabs/Character/Equipment"));
+            equipment.transform.SetParent(Canvas.transform);
+            equipment.transform.localPosition = Vector3.zero;
+            UIStack.Instance.PushUI(equipment);
+
+            RectTransform content = equipment.GetComponent<UI>().Vars["Content"].transform as RectTransform;
+            Vector3 position = new Vector3(0f, 140f, 0f);
+
+            foreach (var s in _SlotName)
             {
-                CharacterEquipment.Equipment Equi = json._Equipment[s];
+                if (json._Equipment.ContainsKey(s))
+                {
+                    CharacterEquipment.Equipment Equi = json._Equipment[s];
 
-                GameObject obj = Instantiate(Resources.Load<GameObject>("Prefabs/Item"));
-                obj.GetComponent<Item>().SetUp(Equi);
-                obj.transform.SetParent(content);
-                obj.transform.localPosition = position;
+                    GameObject obj = Instantiate(Resources.Load<GameObject>("Prefabs/Character/Item"));
+                    obj.GetComponent<Item>().SetUp(Equi);
+                    obj.transform.SetParent(content);
+                    obj.transform.localPosition = position;
 
-                position.y -= 100f;
+                    position.y -= 100f;
+                }
             }
- 
         }
+        Destroy(this.gameObject);
     }
 }

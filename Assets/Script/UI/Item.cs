@@ -36,6 +36,7 @@ public class Item : UI {
     private string ReinforceSetting()
     {
         string output = "- ";
+        Color color;
 
         if(_Equipment._AmplificationName == null && _Equipment._Reinforce > 0)
         {
@@ -45,12 +46,13 @@ public class Item : UI {
         if(_Equipment._AmplificationName != null && _Equipment._Reinforce > 0)
         {
             output = "+" + _Equipment._Reinforce.ToString() + "증폭";
-            _Reinforce.color = new Color(128, 0, 128, 255);
+            _Reinforce.color = new Color(1, 0, 1, 1);
         }
 
         if (_Equipment._SlotName.Equals("무기") && _Equipment._Refine > 0)
         {
             output += "(" + _Equipment._Refine.ToString() + ")";
+            _Reinforce.color = new Color(1, 0, 1, 1);
         }
 
         return output;
@@ -58,18 +60,34 @@ public class Item : UI {
 
     private void NameSetting()
     {
+        Color color=new Color();
+
         switch (_Equipment._ItemRarity)
         {
             case "에픽":
-                Debug.Log(new Color(255, 215, 0));
-                //_Name.color.
+                ColorUtility.TryParseHtmlString("#ffd700", out color);
                 break;
             case "레전더리":
-                //_Name.color = new Color(255.0f,140.0f,0.0f);
+                ColorUtility.TryParseHtmlString("#ff8c00", out color);
+                break;
+            case "크로니클":
+                ColorUtility.TryParseHtmlString("#D45555FF", out color);
                 break;
             case "레어":
-                _Name.color = Color.blue;
+                ColorUtility.TryParseHtmlString("#4169e1", out color);
+                break;
+            case "유니크":
+                color = new Color(1, 0, 1, 1);
+                break;
+            case "언커먼":
+                ColorUtility.TryParseHtmlString("#87cefa", out color);
+                break;
+            case "커먼":
+                color = Color.black;
                 break;
         }
+
+        _Name.color = color;
+
     }
 }

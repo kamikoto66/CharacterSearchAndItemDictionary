@@ -29,7 +29,7 @@ public class CharacterFlagSearch : DnfApiBase
 
         var json = JsonConvert.DeserializeObject<CharacterFlag>(www.text);
 
-        if (json != null)
+        if (json != null && json._Flag != null)
         {
             var Canvas = FindObjectOfType<Canvas>().transform;
 
@@ -59,6 +59,10 @@ public class CharacterFlagSearch : DnfApiBase
             FlagPage.GetComponent<UI>().Vars["Description"].GetComponentInChildren<Text>().text = json._Flag._ItemAbility;
 
             json.Print();
+        }
+        else
+        {
+            UIManager.OpenUI<PopUp>("Prefabs/PopUp");
         }
     }
 }

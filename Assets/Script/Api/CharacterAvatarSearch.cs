@@ -29,7 +29,7 @@ public class CharacterAvatarSearch : DnfApiBase
         var json = JsonConvert.DeserializeObject<CharacterAvatar>(www.text);
         json.ListToDictionary();
 
-        if(json != null)
+        if(json != null && json._Avatar.Count > 0)
         {
             var Canvas = FindObjectOfType<Canvas>().transform;
 
@@ -65,7 +65,12 @@ public class CharacterAvatarSearch : DnfApiBase
 
             //json.Print();
 
-            Destroy(this.gameObject);
         }
+        else
+        {
+            UIManager.OpenUI<PopUp>("Prefabs/PopUp");
+        }
+
+        Destroy(this.gameObject);
     }
 }

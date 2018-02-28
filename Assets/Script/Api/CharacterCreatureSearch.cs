@@ -29,7 +29,8 @@ public class CharacterCreatureSearch : DnfApiBase {
 
         var json = JsonConvert.DeserializeObject<CharacterCreature>(www.text);
 
-        if(json != null && json._Creature != null)
+
+        if (json != null && json._Creature != null)
         {
             var Canvas = FindObjectOfType<Canvas>().transform;
 
@@ -44,6 +45,11 @@ public class CharacterCreatureSearch : DnfApiBase {
             equipment.GetComponent<UI>().Vars["OverSkill"].GetComponentInChildren<Text>().text = json._Creature._OverSkill._Description;
 
             json.Print();
+        }
+        else
+        {
+            //팝업창
+            UIManager.OpenUI<PopUp>("Prefabs/PopUp");
         }
 
 

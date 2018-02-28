@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Newtonsoft.Json;
 
 public class CharacterCreatureSearch : DnfApiBase {
@@ -28,6 +29,24 @@ public class CharacterCreatureSearch : DnfApiBase {
 
         var json = JsonConvert.DeserializeObject<CharacterCreature>(www.text);
 
-        json.Print();
+        if(json != null && json._Creature != null)
+        {
+            var Canvas = FindObjectOfType<Canvas>().transform;
+
+            var equipment = Instantiate(Resources.Load<GameObject>("Prefabs/Character/CreaturePage"));
+            equipment.transform.SetParent(Canvas.transform);
+            equipment.transform.localPosition = new Vector3(0.0f, -30.0f, 0.0f);
+            UIStack.Instance.PushUI(equipment);
+
+            equipment.GetComponent<CreaturePage>().StartCoroutine(equipment.GetComponent<CreaturePage>().SpriteLoad(json._Creature._ItemId));
+            equipment.GetComponent<UI>().Vars["Name"].GetComponentInChildren<Text>().text = json._Creature._ItemName;
+            equipment.GetComponent<UI>().Vars["Skill"].GetComponentInChildren<Text>().text = json._Creature._Skill._Description;
+            equipment.GetComponent<UI>().Vars["OverSkill"].GetComponentInChildren<Text>().text = json._Creature._OverSkill._Description;
+
+            json.Print();
+        }
+
+
+        Destroy(this.gameObject);
     }
 }

@@ -49,7 +49,7 @@ public class CharacterFlag : CharacterInfo
         public string _ItemAbility;
 
         [JsonProperty("gems")]
-        public ReadOnlyCollection<Gem> _Gems;
+        public List<Gem> _Gems;
     }
 
     [JsonProperty("flag")]
@@ -64,6 +64,7 @@ public class CharacterFlag : CharacterInfo
         foreach(var v in _Flag._Gems)
         {
             Debug.Log(v._SlotNo);
+            Debug.Log(v._ItemId);
             Debug.Log(v._ItemName);
         }
     }

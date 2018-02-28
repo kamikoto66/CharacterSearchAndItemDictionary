@@ -49,12 +49,14 @@ public class CharacterEquipmentSearch : DnfApiBase
                     GameObject obj = Instantiate(Resources.Load<GameObject>("Prefabs/Character/Item"));
                     obj.GetComponent<Item>().SetUp(Equi);
                     obj.transform.SetParent(content);
-                    obj.transform.localPosition = position;
-
-                    position.y -= 100f;
                 }
             }
+
+            var size = content.sizeDelta;
+            size.y = content.transform.childCount * 50.0f;
+            content.sizeDelta = size;
         }
+
         Destroy(this.gameObject);
     }
 }

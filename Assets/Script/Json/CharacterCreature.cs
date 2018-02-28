@@ -83,5 +83,9 @@ public class CharacterCreature : CharacterInfo {
         {
             Debug.Log(v._ItemName);
         }
+
+        Debug.Log(_Creature._Skill._Name + "|" + _Creature._Skill._Description);
+        Debug.Log(_Creature._OverSkill._Name + "|" + _Creature._OverSkill._Description);
+
     }
 }

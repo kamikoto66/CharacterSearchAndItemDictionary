@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Newtonsoft.Json;
 
 public class CharacterAbilitySearch : DnfApiBase{
@@ -35,7 +36,7 @@ public class CharacterAbilitySearch : DnfApiBase{
 
             var AbilityPage = Instantiate(Resources.Load<GameObject>("Prefabs/Character/AbilityPage"));
             AbilityPage.transform.SetParent(Canvas.transform);
-            AbilityPage.transform.localPosition = new Vector3(0f, -30f,0f);
+            AbilityPage.transform.localPosition = Vector3.zero;
             UIStack.Instance.PushUI(AbilityPage);
 
             var AbilityUI = AbilityPage.GetComponent<UI>();
@@ -44,9 +45,21 @@ public class CharacterAbilitySearch : DnfApiBase{
             {
                 var status = json._Ability[ability];
 
-                var obj = AbilityUI.Vars[status._Name];
-                obj.GetComponent<Ability>().SetUp(status);
+                AbilityUI.Vars[ability].GetComponent<Text>().text = status._Value.ToString();
             }
+
+            string buffs = "";
+
+            foreach(var buff in json._Buffs)
+            {
+                buffs += buff._Name;
+                if (buff._Level > 0)
+                    buffs += " Lv." + buff._Level.ToString() + " ";
+                else
+                    buffs += " ";
+            }
+
+            AbilityUI.Vars["Text"].GetComponent<Text>().text = buffs;
         }
         Destroy(this.gameObject);
     }

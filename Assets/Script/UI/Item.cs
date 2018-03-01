@@ -36,7 +36,6 @@ public class Item : UI {
     private string ReinforceSetting()
     {
         string output = "- ";
-        Color color;
 
         if(_Equipment._AmplificationName == null && _Equipment._Reinforce > 0)
         {

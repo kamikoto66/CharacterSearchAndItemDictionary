@@ -38,7 +38,6 @@ public class CharacterEquipmentSearch : DnfApiBase
             UIStack.Instance.PushUI(equipment);
 
             RectTransform content = equipment.GetComponent<UI>().Vars["Content"].transform as RectTransform;
-            Vector3 position = new Vector3(0f, 140f, 0f);
 
             foreach (var s in _SlotName)
             {

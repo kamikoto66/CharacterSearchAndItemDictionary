@@ -45,8 +45,6 @@ public class SearchcharacterInfo : DnfApiBase {
 
             RectTransform Content = Result.transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<RectTransform>();
 
-            Vector3 pos = new Vector3(350.0f, -150.0f, 0.0f);
-
             foreach (var user in json.rows)
             {
                 string UserInfoText = "";
@@ -61,9 +59,6 @@ public class SearchcharacterInfo : DnfApiBase {
                 UserInfo.GetComponent<UserInfo>().Server = _Server;
                 UserInfo.GetComponentInChildren<Text>().text = UserInfoText;
                 UserInfo.transform.SetParent(Content);
-                //UserInfo.transform.localPosition = pos;
-
-                //pos.y -= 170.0f;
             }
 
             int childCount = Content.childCount;

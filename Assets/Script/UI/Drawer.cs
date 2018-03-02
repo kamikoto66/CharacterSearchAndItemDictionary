@@ -20,9 +20,15 @@ public class Drawer : UI {
             _EmptyButton.gameObject.SetActive(false);
         });
 
+        UIHelper.AddButtonListener(Vars["License"], () => {
+            UIManager.OpenUI<License>("Prefabs/License");
+            _DrawerAnimator.SetTrigger("close");
+            _EmptyButton.gameObject.SetActive(false);
+        });
+
         UIHelper.AddButtonListener(Vars["CharacterSearch"], () =>
         {
-            GameObject.Find("Drawer").GetComponent<Animator>().SetTrigger("close");
+            _DrawerAnimator.SetTrigger("close");
             _EmptyButton.gameObject.SetActive(false);
 
 
@@ -31,7 +37,6 @@ public class Drawer : UI {
                 var obj = Instantiate(Resources.Load<GameObject>("Prefabs/Character/ServerControl"));
                 UIStack.Instance.PushUI(obj, true);
                 obj.transform.localPosition = Vector2.zero;
-
             }
         });
     }

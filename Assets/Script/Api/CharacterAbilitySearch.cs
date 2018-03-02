@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Newtonsoft.Json;
+using System.IO;
 
 public class CharacterAbilitySearch : DnfApiBase{
 
@@ -46,6 +47,7 @@ public class CharacterAbilitySearch : DnfApiBase{
                 var status = json._Ability[ability];
 
                 AbilityUI.Vars[ability].GetComponent<Text>().text = status._Value.ToString();
+                AbilityUI.Vars[ability].GetComponent<Text>().color = Color.green;
             }
 
             string buffs = "";

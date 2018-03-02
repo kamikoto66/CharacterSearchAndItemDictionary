@@ -47,6 +47,7 @@ public class CharacterEquipmentSearch : DnfApiBase
 
                     GameObject obj = Instantiate(Resources.Load<GameObject>("Prefabs/Character/Item"));
                     obj.GetComponent<Item>().SetUp(Equi);
+                    obj.GetComponent<Item>().SpriteLoad();
                     obj.transform.SetParent(content);
                 }
             }

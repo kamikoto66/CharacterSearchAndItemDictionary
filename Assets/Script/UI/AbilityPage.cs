@@ -10,5 +10,12 @@ public class AbilityPage : UI {
         UIHelper.AddButtonListener(Vars["back"], () => {
             UIStack.Instance.PopUI();
         });
+
+        UIHelper.AddButtonListener(Vars["ScreenShot"], ScreenShot);
+    }
+
+    public void ScreenShot()
+    {
+
     }
 }

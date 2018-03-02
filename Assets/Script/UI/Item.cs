@@ -9,9 +9,11 @@ public class Item : UI {
     private Text _SlotName;
     private Text _Name;
     private Text _Reinforce;
+    private Coroutine _Coroutine;
 
 	// Use this for initialization
 	private void Init() {
+
     }
 
     public GameObject SetUp(CharacterEquipment.Equipment Equi)
@@ -24,7 +26,7 @@ public class Item : UI {
 
         string s = ReinforceSetting();
 
-        _SlotName.text = _Equipment._SlotName;
+        //_SlotName.text = _Equipment._SlotName;
         _Name.text = _Equipment._ItemName;
         _Reinforce.text = s;
 
@@ -87,6 +89,23 @@ public class Item : UI {
         }
 
         _Name.color = color;
+    }
 
+    public void SpriteLoad()
+    {
+        _Coroutine = StartCoroutine(SpriteLoad(_Equipment._ItemId));
+    }
+
+    private IEnumerator SpriteLoad(string code)
+    {
+        string Url = "https://img-api.neople.co.kr/df/items/" + code;
+
+        WWW www = new WWW(Url);
+        yield return www;
+
+        Sprite sprite = Sprite.Create(www.texture, new Rect(0, 0, www.texture.width, www.texture.height), new Vector2(0.5f, 0.5f));
+        Vars["Index"].GetComponent<Image>().sprite = sprite;
+
+        StopCoroutine(_Coroutine);
     }
 }

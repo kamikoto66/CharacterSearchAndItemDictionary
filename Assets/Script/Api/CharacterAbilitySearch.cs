@@ -38,6 +38,7 @@ public class CharacterAbilitySearch : DnfApiBase{
             var AbilityPage = Instantiate(Resources.Load<GameObject>("Prefabs/Character/AbilityPage"));
             AbilityPage.transform.SetParent(Canvas.transform);
             AbilityPage.transform.localPosition = Vector3.zero;
+            AbilityPage.GetComponent<AbilityPage>().characterName = json.characterName;
             UIStack.Instance.PushUI(AbilityPage);
 
             var AbilityUI = AbilityPage.GetComponent<UI>();

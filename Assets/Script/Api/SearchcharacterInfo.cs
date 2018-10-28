@@ -37,7 +37,7 @@ public class SearchcharacterInfo : DnfApiBase {
 
         var json = JsonConvert.DeserializeObject<CharacterSerch>(www.text);
 
-        if(json.rows.Count != 0 && json != null)
+        if (json.rows.Count != 0 && json != null)
         {
             var Result = Instantiate(Resources.Load<GameObject>("Prefabs/Character/Result 1"));
             Result.transform.SetParent(GameObject.Find("Canvas-UIManager").transform);
@@ -75,7 +75,6 @@ public class SearchcharacterInfo : DnfApiBase {
             UIManager.OpenUI<PopUp>("Prefabs/PopUp");
         }
 
-        Destroy(this.gameObject);
-        StopAllCoroutines();
+        Destroy(gameObject);
     }
 }

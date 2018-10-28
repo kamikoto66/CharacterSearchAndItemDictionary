@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CharacterEquipmentSearch : DnfApiBase
 {
@@ -38,6 +39,8 @@ public class CharacterEquipmentSearch : DnfApiBase
             UIStack.Instance.PushUI(equipment);
 
             RectTransform content = equipment.GetComponent<UI>().Vars["Content"].transform as RectTransform;
+            var Name = equipment.GetComponent<UI>().Vars["Name"].GetComponentInChildren<Text>().text = json.characterName + "\n" + "Lv." + json.level.ToString() + "|" + json.jobName + "|" + GetServer(_Server);
+
 
             foreach (var s in _SlotName)
             {
